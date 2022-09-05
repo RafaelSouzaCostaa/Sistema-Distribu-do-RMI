@@ -12,34 +12,30 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import project_distribuido.Calculo;
+import project_distribuido.IMath;
 
 /**
  *
  * @author Rafael de Souza Costa
  */
-public class Cliente {
-    
+public class Client_Renner {
     public static void main(String[] args) {
         try {
-            int porta = 8099;
-            String registryHost = "192.168.0.100";
+            int porta = 1199;
+            String registryHost = "192.168.0.103";
             String port = String.valueOf(porta);
             
-            Calculo objCalculo;
-            objCalculo = (Calculo)Naming.lookup("//" + registryHost + ":" + port + "/" + "XServer");
+            IMath math = (IMath) Naming.lookup("//" + registryHost + ":" + port + "/" + "math");
             
-            double v1 = Double.valueOf(JOptionPane.showInputDialog("Digite o Valor 1: "));
-            double v2 = Double.valueOf(JOptionPane.showInputDialog("Digite o Valor 2: "));
+            JOptionPane.showMessageDialog(null, math.somar(5, 5));
             
-            JOptionPane.showMessageDialog(null, objCalculo.restOfDivision(v1, v2));
             
         } catch (NotBoundException ex) {
-            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Client_Renner.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
-            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Client_Renner.class.getName()).log(Level.SEVERE, null, ex);
         } catch (RemoteException ex) {
-            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Client_Renner.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

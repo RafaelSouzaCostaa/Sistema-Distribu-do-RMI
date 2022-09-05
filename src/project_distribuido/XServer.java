@@ -19,11 +19,12 @@ import java.util.logging.Logger;
 public class XServer {
     public static void main(String[] args){
         try {
+            System.getProperty("java.security.policy");
             int porta = 8099;
             LocateRegistry.createRegistry(porta);
-            String registryHost = "127.0.0.1";
+            String registryHost = "192.168.0.100";
             String port = String.valueOf(porta);
-            
+            //192.168.56.1
             Controller control = new Controller();
             
             Naming.rebind("//" + registryHost + ":" + port + "/" + "XServer", control);
